@@ -1,10 +1,9 @@
 .\objects\rgb.o: ..\src\hardware\rgb.c
 .\objects\rgb.o: ..\src\hardware\rgb.h
-.\objects\rgb.o: ..\src\CMSIS\CM3\DeviceSupport\ST\STM32F10x\system_stm32f10x.h
-.\objects\rgb.o: ..\src\STM32F10x_StdPeriph_Driver\inc\stm32f10x_gpio.h
 .\objects\rgb.o: ..\src\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x.h
 .\objects\rgb.o: ..\src\CMSIS\CM3\CoreSupport\core_cm3.h
 .\objects\rgb.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\rgb.o: ..\src\CMSIS\CM3\DeviceSupport\ST\STM32F10x\system_stm32f10x.h
 .\objects\rgb.o: ..\src\user\stm32f10x_conf.h
 .\objects\rgb.o: ..\src\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h
 .\objects\rgb.o: ..\src\CMSIS\CM3\DeviceSupport\ST\STM32F10x\stm32f10x.h

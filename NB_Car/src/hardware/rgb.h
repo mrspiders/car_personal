@@ -1,7 +1,6 @@
 #ifndef __RGB_H
 #define __RGB_H	 
-#include "system_stm32f10x.h"
-#include "stm32f10x_gpio.h"
+#include "stm32f10x.h"
 
 
 void LEDInit(void);
