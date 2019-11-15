@@ -3,7 +3,7 @@
 #include "stm32f10x.h"
 
 
-void moveInit();
+void moveInit(void);
 void moveForward(u8 val);
 void moveBack(u8 val);
 
