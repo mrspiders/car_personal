@@ -53,8 +53,85 @@ void ledInit()
 	TIM_Cmd(TIM3, ENABLE);  //使能TIM3
 }
 
-//led灯PB5pwm输出控制
-void setPWMled(u16 val)
+
+
+/******************************************
+ 函数名称：	LED3PWM控制
+ 参数：		u16，亮度强弱，调节范围0-100
+ 返回值：	void
+ 备注：
+*******************************************/
+void setPWMled(u8 val)
 {
 	TIM_SetCompare2(TIM3, val);
+}
+
+
+
+/******************************************
+ 函数名称：	LED2循环打开关闭
+ 参数：		void
+ 返回值：	void
+ 备注：
+*******************************************/
+void LED2Flash(void)
+{
+	static u8 LED2State = 0;
+	
+	if(LED2State)
+		GPIO_SetBits(GPIOE,GPIO_Pin_5);
+	else
+		GPIO_ResetBits(GPIOE,GPIO_Pin_5);
+	
+	LED2State = !LED2State;
+}
+
+
+
+/******************************************
+ 函数名称：	LED3循环打开关闭
+ 参数：		void
+ 返回值：	void
+ 备注：使用亮度100和亮度0表示亮灭
+*******************************************/
+void LED3Flash(void)
+{
+	static u8 LED3State = 0;
+	
+	if(LED3State)
+		setPWMled(0);
+	else
+		setPWMled(100);
+	
+	LED3State = !LED3State;
+}
+
+
+
+/******************************************
+ 函数名称：	执行一次呼吸灯
+ 参数：		void
+ 返回值：	void
+ 备注：
+*******************************************/
+void LED3OneBreath(void)
+{
+	u8 led0pwmval=0;
+	u8 dir=1;	
+	
+	for(u8 i = 0; i < 200; i++)
+	{
+		delay_ms(10);	 
+		if(dir)
+			led0pwmval++;
+		else 
+			led0pwmval--;
+
+		if(led0pwmval>99)
+			dir=0;
+		if(led0pwmval==0)
+			dir=1;										 
+		setPWMled(led0pwmval);
+	}
+		
 }

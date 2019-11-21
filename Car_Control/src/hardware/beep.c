@@ -21,3 +21,23 @@ void beepInit(void)
 
 	GPIO_ResetBits(GPIOB,GPIO_Pin_8);
 }
+
+
+
+/******************************************
+ 函数名称：	蜂鸣器循环打开关闭
+ 参数：		void
+ 返回值：	void
+ 备注：
+*******************************************/
+void beepFlash(void)
+{
+	static u8 state = 1;
+	
+	if(state)
+		GPIO_SetBits(GPIOB,GPIO_Pin_8);
+	else
+		GPIO_ResetBits(GPIOB,GPIO_Pin_8);
+	
+	state = !state;
+}
