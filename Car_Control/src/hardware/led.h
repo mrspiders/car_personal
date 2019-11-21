@@ -4,6 +4,6 @@
 
 
 void ledInit(void);
-
+void setPWMled(u16 val);
 
 #endif
