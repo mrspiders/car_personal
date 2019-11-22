@@ -32,3 +32,5 @@
 .\objects\main.o: ..\src\hardware\led.h
 .\objects\main.o: ..\src\hardware\beep.h
 .\objects\main.o: ..\src\hardware\key.h
+.\objects\main.o: ..\src\user\usart.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
