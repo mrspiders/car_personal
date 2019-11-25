@@ -28,7 +28,7 @@ int main(void)
 			for(t = 0; t < len; t++)
 			{
 				USART_SendData(USART1, USART_RX_BUF[t]);	//向串口1发送数据，发送一个字节
-				while(USART_GetFlagStatus(USART1, USART_FLAG_TC) != SET)	//检测发送的一个字节是否完成发送
+				while(USART_GetFlagStatus(USART1, USART_FLAG_TC) != SET)	//获取状态标志位，检测发送的一个字节是否完成发送
 					;//等待发送结束
 			}
 			
