@@ -1,30 +1,30 @@
 #include "usart.h"
 
 
-//加入以下代码,支持printf函数,而不需要选择use MicroLIB	  
-#if 1
-#pragma import(__use_no_semihosting)             
-//标准库需要的支持函数                 
-struct __FILE 
-{ 
-	int handle; 
+////加入以下代码,支持printf函数,而不需要选择use MicroLIB	  
+//#if 1
+//#pragma import(__use_no_semihosting)             
+////标准库需要的支持函数                 
+//struct __FILE 
+//{ 
+//	int handle; 
 
-}; 
+//}; 
 
-FILE __stdout;       
-//定义_sys_exit()以避免使用半主机模式    
-void _sys_exit(int x) 
-{ 
-	x = x; 
-} 
-//重定义fputc函数 
-int fputc(int ch, FILE *f)
-{      
-	while((USART1->SR&0X40)==0);//循环发送,直到发送完毕   
-    USART1->DR = (u8) ch;      
-	return ch;
-}
-#endif 
+//FILE __stdout;       
+////定义_sys_exit()以避免使用半主机模式    
+//void _sys_exit(int x) 
+//{ 
+//	x = x; 
+//} 
+////重定义fputc函数 
+//int fputc(int ch, FILE *f)
+//{      
+//	while((USART1->SR&0X40)==0);//循环发送,直到发送完毕   
+//    USART1->DR = (u8) ch;      
+//	return ch;
+//}
+//#endif 
 
 
 
@@ -82,6 +82,40 @@ void uart1Init(u32 bound)
 	
 	//使能串口
 	USART_Cmd(USART1, ENABLE);
+}
+
+
+
+/******************************************
+ 函数名称：	串口字符发送函数
+ 参数：		1、USART_TypeDef,*USARTx,选择串口
+			2、uint8_t,ch,要发送的字符
+ 返回值：	void
+ 备注：	每次发送一个字符
+*******************************************/
+void usart_send_char(USART_TypeDef *USARTx, uint8_t ch)
+{
+	USART_SendData(USARTx, ch);
+	while(USART_GetFlagStatus(USARTx, USART_FLAG_TC) == RESET)
+		;
+}
+
+
+
+/******************************************
+ 函数名称：	串口字符串发送函数
+ 参数：		1、USART_TypeDef,*USARTx,选择串口
+			2、uint8_t,ch,要发送的字符
+ 返回值：	void
+ 备注：	每次发送一个字符
+*******************************************/
+void usart_send_string(USART_TypeDef *USARTx, uint8_t *str)
+{
+	while(*str != 0)
+	{
+		usart_send_char(USARTx, *str);
+		str++;
+	}
 }
 
 

@@ -25,10 +25,12 @@ int main(void)
 		if(USART_RX_STA & 0x8000)
 		{
 			if(USART_RX_STA & 0x2000){	//0010 0000 0000 0000
-				printf("\r\n\r\n输入字符个数超限，已清除输入历史，请重新输入！\r\n\r\n");
+				//printf("\r\n\r\n输入字符个数超限，已清除输入历史，请重新输入！\r\n\r\n");
+				usart_send_string(USART1, "\r\n\r\n输入字符个数超限，已清除输入历史，请重新输入！\r\n\r\n");
 			}else{
 				len = USART_RX_STA & 0x3fff;	//得到此次接收到的数据长度  0011 1111 1111 1111   →   0000 0001 0000 0000
-				printf("\r\n您发送的信息为：\r\n\r\n");
+				//printf("\r\n您发送的信息为：\r\n\r\n");
+				usart_send_string(USART1, "\r\n您发送的信息为：\r\n\r\n");
 				
 				for(t = 0; t < len; t++)
 				{
@@ -37,7 +39,8 @@ int main(void)
 						;//等待发送结束
 				}
 				
-				printf("\r\n\r\n");	//插入新行
+				//printf("\r\n\r\n");	//插入新行
+				usart_send_string(USART1, "\r\n\r\n");
 			}
 				
 			USART_RX_STA = 0;
