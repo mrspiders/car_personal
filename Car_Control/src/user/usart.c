@@ -111,7 +111,7 @@ void usart_send_char(USART_TypeDef *USARTx, uint8_t ch)
 *******************************************/
 void usart_send_string(USART_TypeDef *USARTx, uint8_t *str)
 {
-	while(*str != 0)
+	while(*str)
 	{
 		usart_send_char(USARTx, *str);
 		str++;
